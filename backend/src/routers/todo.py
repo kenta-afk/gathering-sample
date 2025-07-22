@@ -19,3 +19,17 @@ async def get_todos(db: AsyncSession = Depends(get_db), response_model=Todos):
     todos: Todos = result.scalars().all()
 
     return todos
+
+@todo_router.patch("/todos/{todo_id}")
+async def toggle_todo_completed(todo_id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Todo).where(Todo.id == todo_id))
+    todo = result.scalar_one_or_none()
+    
+    if todo is None:
+        raise HTTPException(status_code=404, detail="Todo not found")
+    
+    # completedの状態を反転
+    todo.completed = not todo.completed
+    await db.commit()
+    
+    return todo
