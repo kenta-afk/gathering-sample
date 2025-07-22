@@ -21,8 +21,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/backend
-    environment:
-      - ENV=development
     restart: unless-stopped
 
   frontend:
