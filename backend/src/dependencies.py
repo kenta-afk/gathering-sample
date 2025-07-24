@@ -1,14 +1,15 @@
 import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from dotenv import load_dotenv
 
+load_dotenv()
 # 環境変数からデータベース設定を取得
-MYSQL_USER = os.getenv("MYSQL_USER", "root")
-MYSQL_PASSWORD = os.getenv("MYSQL_ROOT_PASSWORD", "password")
-MYSQL_HOST = os.getenv("MYSQL_HOST", "mysql")
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "todo")
+MYSQL_ROOT_PASSWORD = os.getenv("MYSQL_ROOT_PASSWORD")
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 
 # データベースURLを構築
-DATABASE_URL = f"mysql+aiomysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DATABASE}"
+DATABASE_URL = f"mysql+aiomysql://root:{MYSQL_ROOT_PASSWORD}@{MYSQL_HOST}/{MYSQL_DATABASE}"
 
 engine = create_async_engine(DATABASE_URL)
 

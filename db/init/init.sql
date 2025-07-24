@@ -8,4 +8,5 @@ CREATE TABLE todos (
 );
 
 INSERT INTO todos (task, completed) VALUES
-  ('Sample Todo', FALSE);
+  ('Sample Todo', FALSE),
+  ('Another Todo', TRUE);
