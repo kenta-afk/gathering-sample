@@ -2,7 +2,9 @@ import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from dotenv import load_dotenv
 
-load_dotenv()
+if os.getenv("ENV") != "production":
+    load_dotenv()
+
 # 環境変数からデータベース設定を取得
 MYSQL_ROOT_PASSWORD = os.getenv("MYSQL_ROOT_PASSWORD")
 MYSQL_HOST = os.getenv("MYSQL_HOST")
